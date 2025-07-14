@@ -3,7 +3,7 @@
 
 int main() {
     Paleta p;
-    if (!p.lerDeArquivo("paleta_teste.txt")) {
+    if (!p.lerDeArquivo("Etapa1/paleta_teste.txt")) {
         std::cout << "Erro na leitura do arquivo.\n";
         return 1;
     }

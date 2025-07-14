@@ -12,11 +12,6 @@ struct Cor {
     Cor(int r = 0, int g = 0, int b = 0) : R(r), G(g), B(b) {}
 };
 
-void imprimirCor(const Cor& cor) {
-    std::cout << "RGB("
-              << cor.R << ", " 
-              << cor.G << ", "
-              << cor.B << ")";
-}
+void imprimirCor(const Cor& c);
 
 #endif

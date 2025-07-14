@@ -2,6 +2,15 @@
 #include <fstream>
 #include <iostream>
 
+// Construtor
+Paleta::Paleta() {
+    quantidade = 0;
+    for (int i = 0; i < 100; ++i) {
+        valores[i] = 0.0f;
+        cores[i] = Cor(0, 0, 0);  // usa o construtor Cor(int, int, int)
+    }
+}
+
 bool Paleta::lerDeArquivo(const std::string& nomeArquivo) {
     std::ifstream arquivo(nomeArquivo);
     if (!arquivo) {
@@ -22,12 +31,12 @@ bool Paleta::lerDeArquivo(const std::string& nomeArquivo) {
         float v;
         if (!(arquivo >> v >> r >> g >> b)) {
             std::cerr << "Erro ao ler dados da cor na linha " << i + 2 << '\n';
-            quantidade = i; // salva até onde deu certo
+            quantidade = i;
             return false;
         }
 
         valores[i] = v;
-        cores[i] = Cor{r, g, b}; // se Cor tem esse construtor
+        cores[i] = Cor{r, g, b};
     }
 
     return true;
@@ -45,4 +54,11 @@ Cor Paleta::consultarCor(float valor) const {
     }
 
     return cores[quantidade - 1];
+}
+
+void imprimirCor(const Cor& cor) {
+    std::cout << "RGB("
+              << cor.R << ", " 
+              << cor.G << ", "
+              << cor.B << ")";
 }
