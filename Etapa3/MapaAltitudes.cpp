@@ -5,8 +5,8 @@
 #include <ctime>
 #include <fstream>
 #include <cstdlib>
-#include "paleta.h"
-#include "imagem.h"
+#include "../Etapa1/paleta.h"
+#include "../Etapa2/imagem.h"
 
 using namespace std;
 

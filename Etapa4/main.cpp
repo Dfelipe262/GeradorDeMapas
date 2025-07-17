@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include "MapaAltitudes.h"
-#include "paleta.h"
-#include "imagem.h"
+#include "../Etapa3/MapaAltitudes.h"
+#include "../Etapa1/paleta.h"
+#include "../Etapa2/imagem.h"
 
 int main() {
     // Variáveis para armazenar a entrada do usuário
@@ -14,7 +14,7 @@ int main() {
     // --- Solicita os dados ao usuário ---
 
     // Requisito: Pedir o nome do arquivo da paleta de cores [cite: 206]
-    std::cout << "Digite o nome do arquivo da paleta de cores (ex: paleta.txt): ";
+    std::cout << "Digite o nome do arquivo da paleta de cores (ex: Etapa4/paleta.txt): ";
     std::cin >> arquivoPaleta;
 
     // Requisito: Pedir o valor de N para o tamanho do mapa [cite: 207, 208]
@@ -38,7 +38,7 @@ int main() {
     // Lê a paleta de cores do arquivo especificado
     Paleta paleta;
     if (!paleta.lerDeArquivo(arquivoPaleta)) {
-        std::cerr << "Erro ao carregar a paleta de cores do arquivo '" << arquivoPaleta << "'.\n";
+        std::cerr << "Erro ao carregar a paleta de cores.\n";
         return 1;
     }
 

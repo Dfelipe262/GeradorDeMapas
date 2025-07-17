@@ -2,8 +2,8 @@
 #define MAPA_ALTITUDES_HPP
 
 #include <string>
-#include "imagem.h"  // ✅ <- Adicione isso
-#include "paleta.h"
+#include "../Etapa2/imagem.h" 
+#include "../Etapa1/paleta.h"
 class MapaAltitudes {
 private:
     int** matriz;
