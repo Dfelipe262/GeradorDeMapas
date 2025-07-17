@@ -1,21 +1,44 @@
 #include <iostream>
+#include <string>
 #include "MapaAltitudes.h"
 #include "paleta.h"
 #include "imagem.h"
 
 int main() {
-    // Parâmetros do terreno
-    int N = 10; // Gera matriz 129x129 (2^7 + 1)
-    double rugosidade = 0.6;
+    // Variáveis para armazenar a entrada do usuário
+    std::string arquivoPaleta;
+    std::string arquivoSaida;
+    int N;
+    double rugosidade;
 
-    // Cria o mapa de altitudes
+    // --- Solicita os dados ao usuário ---
+
+    // Requisito: Pedir o nome do arquivo da paleta de cores [cite: 206]
+    std::cout << "Digite o nome do arquivo da paleta de cores (ex: paleta.txt): ";
+    std::cin >> arquivoPaleta;
+
+    // Requisito: Pedir o valor de N para o tamanho do mapa [cite: 207, 208]
+    std::cout << "Digite o valor de N para gerar o mapa (ex: 10 para 1025x1025): ";
+    std::cin >> N;
+
+    // A rugosidade é um parâmetro essencial para gerar o terreno [cite: 70]
+    std::cout << "Digite o fator de rugosidade (ex: 0.6): ";
+    std::cin >> rugosidade;
+
+    // Requisito: Pedir o nome do arquivo da imagem PPM a ser salvo [cite: 209]
+    std::cout << "Digite o nome do arquivo de saida (ex: saida.ppm): ";
+    std::cin >> arquivoSaida;
+
+    std::cout << "\nProcessando... Por favor, aguarde.\n";
+
+    // Cria o mapa de altitudes com os parâmetros fornecidos
     MapaAltitudes mapa(N, rugosidade);
     mapa.gerarTerreno();
 
-    // Lê a paleta de cores
+    // Lê a paleta de cores do arquivo especificado
     Paleta paleta;
-    if (!paleta.lerDeArquivo("paleta.txt")) {
-        std::cerr << "Erro ao carregar a paleta de cores.\n";
+    if (!paleta.lerDeArquivo(arquivoPaleta)) {
+        std::cerr << "Erro ao carregar a paleta de cores do arquivo '" << arquivoPaleta << "'.\n";
         return 1;
     }
 
@@ -26,10 +49,11 @@ int main() {
         return 1;
     }
 
-    // Salva a imagem em formato PPM
-    imagem->salvarComoPPM("saida.ppm");
-    std::cout << "Imagem gerada e salva como 'saida.ppm'\n";
+    // Salva a imagem em formato PPM com o nome especificado
+    imagem->salvarComoPPM(arquivoSaida);
+    std::cout << "Imagem gerada com sucesso e salva como '" << arquivoSaida << "'\n";
 
+    // Libera a memória alocada para a imagem
     delete imagem;
     return 0;
 }
