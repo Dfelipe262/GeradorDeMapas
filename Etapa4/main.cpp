@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "../Etapa3/MapaAltitudes.h"
+#include "../Etapa3/mapaAltitudes.h"
 #include "../Etapa1/paleta.h"
 #include "../Etapa2/imagem.h"
 
@@ -32,7 +32,7 @@ int main() {
     std::cout << "\nProcessando... Por favor, aguarde.\n";
 
     // Cria o mapa de altitudes com os parâmetros fornecidos
-    MapaAltitudes mapa(N, rugosidade);
+    mapaAltitudes mapa(N, rugosidade);
     mapa.gerarTerreno();
 
     // Lê a paleta de cores do arquivo especificado

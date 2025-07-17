@@ -1,12 +1,12 @@
 #include <iostream>
-#include "MapaAltitudes.h"
+#include "mapaAltitudes.h"
 using namespace std;
 
 int main() {
     int N = 3;           // Define matriz 9x9
     double rug = 0.5;    // Fator de rugosidade
 
-    MapaAltitudes mapa(N, rug);
+    mapaAltitudes mapa(N, rug);
     mapa.gerarTerreno();
 
     cout << "Mapa de Altitudes Gerado:\n";
@@ -15,7 +15,7 @@ int main() {
     mapa.salvarEmArquivo("altitudes.txt");
 
     // Testar leitura
-    MapaAltitudes novoMapa(1, rug);
+    mapaAltitudes novoMapa(1, rug);
     novoMapa.carregarDeArquivo("altitudes.txt");
     cout << "\nMapa lido do arquivo:\n";
     novoMapa.imprimir();

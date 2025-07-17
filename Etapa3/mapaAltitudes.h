@@ -1,10 +1,10 @@
-#ifndef MAPA_ALTITUDES_HPP
-#define MAPA_ALTITUDES_HPP
+#ifndef MAPA_ALTITUDES_H
+#define MAPA_ALTITUDES_H
 
 #include <string>
 #include "../Etapa2/imagem.h" 
 #include "../Etapa1/paleta.h"
-class MapaAltitudes {
+class mapaAltitudes {
 private:
     int** matriz;
     int tamanho;
@@ -17,8 +17,8 @@ private:
     void etapaSquare(int lin, int col, int tam, double escala);
 
 public:
-    MapaAltitudes(int N, double rug);
-    ~MapaAltitudes();
+    mapaAltitudes(int N, double rug);
+    ~mapaAltitudes();
 
     void gerarTerreno();
     void imprimir() const;

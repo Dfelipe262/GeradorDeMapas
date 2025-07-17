@@ -1,4 +1,4 @@
-#include "MapaAltitudes.h"
+#include "mapaAltitudes.h"
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -10,7 +10,7 @@
 
 using namespace std;
 
-MapaAltitudes::MapaAltitudes(int N, double rug) : rugosidade(rug) {
+mapaAltitudes::mapaAltitudes(int N, double rug) : rugosidade(rug) {
     tamanho = pow(2, N) + 1;
     linhas = tamanho;
     colunas = tamanho;
@@ -26,17 +26,17 @@ MapaAltitudes::MapaAltitudes(int N, double rug) : rugosidade(rug) {
     matriz[tamanho - 1][tamanho - 1] = rand() % 256;
 }
 
-MapaAltitudes::~MapaAltitudes() {
+mapaAltitudes::~mapaAltitudes() {
     for (int i = 0; i < linhas; ++i)
         delete[] matriz[i];
     delete[] matriz;
 }
 
-int MapaAltitudes::aleatorio(double escala) {
+int mapaAltitudes::aleatorio(double escala) {
     return static_cast<int>((rand() / (double)RAND_MAX) * 2 * escala - escala);
 }
 
-void MapaAltitudes::etapaDiamond(int lin, int col, int tam, double escala) {
+void mapaAltitudes::etapaDiamond(int lin, int col, int tam, double escala) {
     int meio = tam / 2;
     int media = (
         matriz[lin][col] +
@@ -48,7 +48,7 @@ void MapaAltitudes::etapaDiamond(int lin, int col, int tam, double escala) {
     matriz[lin + meio][col + meio] = media + aleatorio(escala);
 }
 
-void MapaAltitudes::etapaSquare(int lin, int col, int tam, double escala) {
+void mapaAltitudes::etapaSquare(int lin, int col, int tam, double escala) {
     int meio = tam / 2;
     int centroLin = lin + meio;
     int centroCol = col + meio;
@@ -82,7 +82,7 @@ void MapaAltitudes::etapaSquare(int lin, int col, int tam, double escala) {
         ) / 3 + aleatorio(escala);
 }
 
-void MapaAltitudes::gerarTerreno() {
+void mapaAltitudes::gerarTerreno() {
     int passo = tamanho - 1;
     double escala = 128.0;
 
@@ -106,7 +106,7 @@ void MapaAltitudes::gerarTerreno() {
     }
 }
 
-void MapaAltitudes::imprimir() const {
+void mapaAltitudes::imprimir() const {
     for (int i = 0; i < linhas; ++i) {
         for (int j = 0; j < colunas; ++j) {
             cout << setw(4) << matriz[i][j] << " ";
@@ -115,19 +115,19 @@ void MapaAltitudes::imprimir() const {
     }
 }
 
-int MapaAltitudes::getAltura(int lin, int col) const {
+int mapaAltitudes::getAltura(int lin, int col) const {
     return matriz[lin][col];
 }
 
-int MapaAltitudes::getLinhas() const {
+int mapaAltitudes::getLinhas() const {
     return linhas;
 }
 
-int MapaAltitudes::getColunas() const {
+int mapaAltitudes::getColunas() const {
     return colunas;
 }
 
-void MapaAltitudes::salvarEmArquivo(const string& nome) const {
+void mapaAltitudes::salvarEmArquivo(const string& nome) const {
     ofstream arq(nome);
     if (!arq) {
         cerr << "Erro ao abrir o arquivo para escrita.\n";
@@ -145,7 +145,7 @@ void MapaAltitudes::salvarEmArquivo(const string& nome) const {
     arq.close();
 }
 
-void MapaAltitudes::carregarDeArquivo(const string& nome) {
+void mapaAltitudes::carregarDeArquivo(const string& nome) {
     ifstream arq(nome);
     if (!arq) {
         cerr << "Erro ao abrir o arquivo para leitura.\n";
@@ -172,11 +172,9 @@ void MapaAltitudes::carregarDeArquivo(const string& nome) {
 
     arq.close();
 }
-//etapa 4
-// ... (início do arquivo MapaAltitudes.cpp)
 
-//etapa 4
-Imagem* MapaAltitudes::gerarImagem(const Paleta& paleta) const {
+// etapa 4
+Imagem* mapaAltitudes::gerarImagem(const Paleta& paleta) const {
     Imagem* img = new Imagem(colunas, linhas);
 
     for (int i = 0; i < linhas; ++i) {
@@ -184,12 +182,8 @@ Imagem* MapaAltitudes::gerarImagem(const Paleta& paleta) const {
             int altura = matriz[i][j];
             Cor cor = paleta.consultarCor(altura);
 
-            // Lógica de Sombreamento:
-            // Verifica se o pixel atual não está na borda superior ou esquerda.
-            // Compara a altitude atual com a do vizinho a Noroeste (i-1, j-1).
+            // Lógica de Sombreamento
             if (i > 0 && j > 0 && altura < matriz[i - 1][j - 1]) {
-                // Se for menor, o pixel está "na sombra".
-                // Reduz o brilho da cor pela metade.
                 cor.R *= 0.5;
                 cor.G *= 0.5;
                 cor.B *= 0.5;
@@ -201,5 +195,3 @@ Imagem* MapaAltitudes::gerarImagem(const Paleta& paleta) const {
 
     return img;
 }
-
-// ... (restante do arquivo)
