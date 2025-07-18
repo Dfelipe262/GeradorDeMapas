@@ -9,7 +9,11 @@ struct Cor {
     int B; 
 
     // Construtor padrão que inicializa com preto (0,0,0)
-    Cor(int r = 0, int g = 0, int b = 0) : R(r), G(g), B(b) {}
+    Cor(int r = 0, int g = 0, int b = 0) {
+        R = r;
+        G = g;
+        B = b;
+    }
 };
 
 void imprimirCor(const Cor& c);

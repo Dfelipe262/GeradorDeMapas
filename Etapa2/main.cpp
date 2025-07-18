@@ -2,8 +2,9 @@
 #include <iostream>
 
 int main() {
-    // 🔹 Teste 1: Imagem 2x2, todos os pixels devem ser pretos (0, 0, 0)
-    Imagem img1(2, 2); // quando eu inicializo o construtor todos os pixels ficam pretos
+    
+    //inicializa uma imagem toda preta
+    Imagem img1(2, 2); 
     bool todosPretos = true;
 
     for (int y = 0; y < 2; y++) {
@@ -16,13 +17,13 @@ int main() {
     }
 
     if (todosPretos)
-        std::cout << "Teste 1 OK: Todos os pixels são pretos (0, 0, 0).\n";
+        std::cout << "(PASSOU) Teste 1: Todos os pixels são pretos (0, 0, 0).\n";
     else
-        std::cout << "Teste 1 FALHOU: Há pixels diferentes de preto.\n";
+        std::cout << "(FALHA) Teste 1: Há pixels diferentes de preto.\n";
 
-    // 🔹 Teste 2: Imagem 3x4 toda branca (255, 255, 255)
-    Imagem img2(3, 4); // inicializo a imagem
-    for (int y = 0; y < 4; y++) { // deixo ela toda branca
+    //inicializa uma imagem toda branca
+    Imagem img2(3, 4); 
+    for (int y = 0; y < 4; y++) { 
         for (int x = 0; x < 3; x++) {
             img2.setPixel(x, y, Cor(255, 255, 255));
         }
@@ -39,13 +40,13 @@ int main() {
     }
 
     if (todosBrancos)
-        std::cout << "Teste 2 OK: Todos os pixels são brancos (255, 255, 255).\n";
+        std::cout << "(PASSOU) Teste 2: Todos os pixels são brancos (255, 255, 255).\n";
     else
-        std::cout << "Teste 2 FALHOU: Há pixels diferentes de branco.\n";
+        std::cout << "(FALHA) Teste 2: Há pixels diferentes de branco.\n";
 
-    // 🔹 Teste 3: Salvar a imagem branca para um arquivo PPM
+    //Salvar
     img2.salvarComoPPM("imagem_branca.ppm");
-    std::cout << "Teste 3: Imagem salva como 'imagem_branca.ppm'. Abra com um visualizador para conferir.\n";
+    std::cout << "Teste 2: Imagem salva como 'imagem_branca.ppm'.\n";
 
     return 0;
 }

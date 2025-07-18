@@ -11,21 +11,19 @@ int main() {
     int N;
     double rugosidade;
 
-    // --- Solicita os dados ao usuário ---
-
-    // Requisito: Pedir o nome do arquivo da paleta de cores [cite: 206]
+    // Solicita ao usuário o nome do arquivo da paleta de cores
     std::cout << "Digite o nome do arquivo da paleta de cores (ex: Etapa4/paleta.txt): ";
     std::cin >> arquivoPaleta;
 
-    // Requisito: Pedir o valor de N para o tamanho do mapa [cite: 207, 208]
+    // Solicita o valor de N, que define o tamanho do mapa (2^N + 1)
     std::cout << "Digite o valor de N para gerar o mapa (ex: 10 para 1025x1025): ";
     std::cin >> N;
 
-    // A rugosidade é um parâmetro essencial para gerar o terreno [cite: 70]
+    // Solicita o fator de rugosidade usado no algoritmo Diamond-Square
     std::cout << "Digite o fator de rugosidade (ex: 0.6): ";
     std::cin >> rugosidade;
 
-    // Requisito: Pedir o nome do arquivo da imagem PPM a ser salvo [cite: 209]
+    // Solicita o nome do arquivo de saída da imagem gerada
     std::cout << "Digite o nome do arquivo de saida (ex: saida.ppm): ";
     std::cin >> arquivoSaida;
 
@@ -44,16 +42,21 @@ int main() {
 
     // Gera a imagem com base no mapa e na paleta
     Imagem* imagem = mapa.gerarImagem(paleta);
+    
+    // Verifica se a imagem foi gerada com sucesso
     if (!imagem) {
         std::cerr << "Erro ao gerar a imagem.\n";
         return 1;
     }
 
-    // Salva a imagem em formato PPM com o nome especificado
+    // Usa o operador '->' para acessar o método do objeto apontado por 'imagem'
     imagem->salvarComoPPM(arquivoSaida);
+
+    // Informa que a imagem foi salva com sucesso
     std::cout << "Imagem gerada com sucesso e salva como '" << arquivoSaida << "'\n";
 
     // Libera a memória alocada para a imagem
     delete imagem;
+
     return 0;
 }

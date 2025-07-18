@@ -8,10 +8,8 @@
 #include "../Etapa1/paleta.h"
 #include "../Etapa2/imagem.h"
 
-using namespace std;
-
 mapaAltitudes::mapaAltitudes(int N, double rug) : rugosidade(rug) {
-    tamanho = pow(2, N) + 1;
+    tamanho = std::pow(2, N) + 1;
     linhas = tamanho;
     colunas = tamanho;
 
@@ -19,11 +17,11 @@ mapaAltitudes::mapaAltitudes(int N, double rug) : rugosidade(rug) {
     for (int i = 0; i < linhas; ++i)
         matriz[i] = new int[colunas]{};
 
-    srand(time(nullptr));
-    matriz[0][0] = rand() % 256;
-    matriz[0][tamanho - 1] = rand() % 256;
-    matriz[tamanho - 1][0] = rand() % 256;
-    matriz[tamanho - 1][tamanho - 1] = rand() % 256;
+    std::srand(std::time(nullptr));
+    matriz[0][0] = std::rand() % 256;
+    matriz[0][tamanho - 1] = std::rand() % 256;
+    matriz[tamanho - 1][0] = std::rand() % 256;
+    matriz[tamanho - 1][tamanho - 1] = std::rand() % 256;
 }
 
 mapaAltitudes::~mapaAltitudes() {
@@ -33,7 +31,7 @@ mapaAltitudes::~mapaAltitudes() {
 }
 
 int mapaAltitudes::aleatorio(double escala) {
-    return static_cast<int>((rand() / (double)RAND_MAX) * 2 * escala - escala);
+    return static_cast<int>((std::rand() / static_cast<double>(RAND_MAX)) * 2 * escala - escala);
 }
 
 void mapaAltitudes::etapaDiamond(int lin, int col, int tam, double escala) {
@@ -109,9 +107,9 @@ void mapaAltitudes::gerarTerreno() {
 void mapaAltitudes::imprimir() const {
     for (int i = 0; i < linhas; ++i) {
         for (int j = 0; j < colunas; ++j) {
-            cout << setw(4) << matriz[i][j] << " ";
+            std::cout << std::setw(4) << matriz[i][j] << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 }
 
@@ -127,10 +125,10 @@ int mapaAltitudes::getColunas() const {
     return colunas;
 }
 
-void mapaAltitudes::salvarEmArquivo(const string& nome) const {
-    ofstream arq(nome);
+void mapaAltitudes::salvarEmArquivo(const std::string& nome) const {
+    std::ofstream arq(nome);
     if (!arq) {
-        cerr << "Erro ao abrir o arquivo para escrita.\n";
+        std::cerr << "Erro ao abrir o arquivo para escrita.\n";
         return;
     }
 
@@ -145,10 +143,10 @@ void mapaAltitudes::salvarEmArquivo(const string& nome) const {
     arq.close();
 }
 
-void mapaAltitudes::carregarDeArquivo(const string& nome) {
-    ifstream arq(nome);
+void mapaAltitudes::carregarDeArquivo(const std::string& nome) {
+    std::ifstream arq(nome);
     if (!arq) {
-        cerr << "Erro ao abrir o arquivo para leitura.\n";
+        std::cerr << "Erro ao abrir o arquivo para leitura.\n";
         return;
     }
 
