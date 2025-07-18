@@ -28,12 +28,14 @@ mapaAltitudes::mapaAltitudes(int N, double rug) : rugosidade(rug) {
     matriz[tamanho - 1][0] = std::rand() % 256;
     matriz[tamanho - 1][tamanho - 1] = std::rand() % 256;
 }
+
 //destrutor
 mapaAltitudes::~mapaAltitudes() {
     for (int i = 0; i < linhas; ++i)
         delete[] matriz[i];
     delete[] matriz;
 }
+
 /**Gera um número inteiro aleatório no intervalo [-escala, +escala).
  * Esse valor é usado para adicionar variações (ruído) durante a geração do terreno
  * no algoritmo Diamond-Square.
@@ -43,7 +45,6 @@ mapaAltitudes::~mapaAltitudes() {
 int mapaAltitudes::aleatorio(double escala) {
     return static_cast<int>((std::rand() / static_cast<double>(RAND_MAX)) * 2 * escala - escala);
 }
-
 
 /**Executa a etapa "Diamond" do algoritmo Diamond-Square.
  * Calcula o valor do ponto central de um quadrado, com base na média dos seus quatro cantos
@@ -64,6 +65,7 @@ void mapaAltitudes::etapaDiamond(int lin, int col, int tam, double escala) {
 
     matriz[lin + meio][col + meio] = media + aleatorio(escala);
 }
+
 /**Etapa "Square" do algoritmo Diamond-Square.
  * Esta função calcula os valores dos pontos localizados no meio de cada lado de um quadrado.
  * Ela usa a média de três vizinhos para definir o valor de cada ponto, e adiciona uma
@@ -106,6 +108,7 @@ void mapaAltitudes::etapaSquare(int lin, int col, int tam, double escala) {
             matriz[lin + meio][col + meio]
         ) / 3 + aleatorio(escala);
 }
+
 /**A função gerarTerreno
  * Essa função preenche a matriz de altitudes aplicando o algoritmo
  * Diamond-Square para gerar um terreno fractal com variação de altitudes.
@@ -134,6 +137,7 @@ void mapaAltitudes::gerarTerreno() {
         escala *= rugosidade;
     }
 }
+
 /**Essa função imprime o mapa de altitudes (matriz) 
  * 
 */
@@ -145,6 +149,7 @@ void mapaAltitudes::imprimir() const {
         std::cout << std::endl;
     }
 }
+
 /**Essa função serve para pegar a altura (valor de um indice da matriz) 
  * @param lin Recebe o indice da linha que deseja saber a altura
  * @param col Recebe o indice da coluna que deseja saber a altrua
@@ -164,6 +169,7 @@ int mapaAltitudes::getLinhas() const {
 int mapaAltitudes::getColunas() const {
     return colunas;
 }
+
 /**Salva os dados do mapa de altitudes em um arquivo no formato ppm 
  * @param nome Recebe uma string com o nome do arquivo
 */
@@ -184,6 +190,7 @@ void mapaAltitudes::salvarEmArquivo(const std::string& nome) const {
 
     arq.close();
 }
+
 /**Carrega a matriz de altitudes a partir de um arquivo.
  * Esse método abre um arquivo de texto contendo uma matriz de inteiros.
  * Antes de carregar os novos dados, a matriz atual é desalocada da memória.
