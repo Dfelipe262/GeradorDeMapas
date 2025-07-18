@@ -106,12 +106,11 @@ void mapaAltitudes::etapaSquare(int lin, int col, int tam, double escala) {
             matriz[lin + meio][col + meio]
         ) / 3 + aleatorio(escala);
 }
-/**Etapa "Square" do algoritmo Diamond-Square.
- * Esta função calcula os valores dos pontos localizados no meio de cada lado de um quadrado.
- * Ela usa a média de três vizinhos para definir o valor de cada ponto, e adiciona uma
- * variação aleatória proporcional à escala.
- 
- */
+/**A função gerarTerreno
+ * Essa função preenche a matriz de altitudes aplicando o algoritmo
+ * Diamond-Square para gerar um terreno fractal com variação de altitudes.
+ * O processo se dá em múltiplas iterações, reduzindo o tamanho do passo
+ * e ajustando a escala de variação com base no fator de rugosidade.*/
 void mapaAltitudes::gerarTerreno() {
     int passo = tamanho - 1;
     double escala = 128.0;
